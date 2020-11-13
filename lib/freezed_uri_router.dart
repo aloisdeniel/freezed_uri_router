@@ -62,7 +62,8 @@ class FreezedPath {
     for (var entry in json.entries) {
       if (!const ['runtimeType', 'next'].contains(entry.key)) {
         final queryValue = _serializeValue(entry.value);
-        query.add('${Uri.encodeQueryComponent(entry.key)}=${queryValue}');
+        query.add(
+            '${Uri.encodeQueryComponent(entry.key)}=${Uri.encodeQueryComponent(queryValue)}');
       }
     }
 
@@ -91,7 +92,20 @@ class FreezedPath {
       throw Exception('Unsupported value uri encoding for type ${value}');
     }
     final typePrefix = queryTypePrefixes[value.runtimeType];
-    return '${typePrefix}${value}';
+    final encodedValue = () {
+      if (value == null) {
+        return '';
+      }
+      if (value is bool) {
+        return value ? '1' : '0';
+      }
+      if (value is DateTime) {
+        return value.toIso8601String();
+      }
+
+      return value.toString();
+    }();
+    return '${typePrefix}${encodedValue}';
   }
 
   dynamic _deserializeValue(String value) {

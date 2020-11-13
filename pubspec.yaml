@@ -1,6 +1,6 @@
 name: freezed_uri_router
 description: A starting point for Dart libraries or applications.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/aloisdeniel/freezed_uri_router
 
 environment:

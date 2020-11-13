@@ -78,13 +78,13 @@ final uri = Path.products(
   ),
 );
 
-print(uri); // `/products/detail/index?id=i$123`
+print(uri); // `/products/detail/index?id=i%2442`
 ```
 
 ### Deserialize
 
 ```dart
-final path = Path.fromUri(r'/products/detail/index?id=i$123');
+final path = Path.fromUri(r'/products/detail/index?id=i%24123');
 
 print(path); // `Path.products(next: ProductsPath.detail(next: DetailPath.index(id: 123)))`
 ```
